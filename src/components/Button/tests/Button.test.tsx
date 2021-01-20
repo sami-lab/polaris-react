@@ -3,6 +3,7 @@ import {
   CaretDownMinor,
   CaretUpMinor,
   PlusMinor,
+  AddImageMajor,
   SelectMinor,
 } from '@shopify/polaris-icons';
 // eslint-disable-next-line no-restricted-imports
@@ -133,6 +134,46 @@ describe('<Button />', () => {
     });
   });
 
+  describe('iconPlacement', () => {
+    it('renders the icon before content by default', () => {
+      const button = mountWithAppProvider(
+        <Button icon={AddImageMajor}>content</Button>,
+      );
+
+      const container = button.find(UnstyledButton).find('span');
+      const kids: React.ReactElement[] = Array.from(
+        container.children().getElements(),
+      );
+
+      const contentIndex = kids.findIndex(
+        (el) => el.props.className === 'Text',
+      );
+      const iconIndex = kids.findIndex((el) => el.props.className === 'Icon');
+
+      expect(contentIndex > iconIndex).toBe(true);
+    });
+
+    it('renders the icon after content if iconPlacement set to after', () => {
+      const button = mountWithAppProvider(
+        <Button icon={AddImageMajor} iconPlacement="after">
+          content
+        </Button>,
+      );
+
+      const container = button.find(UnstyledButton).find('span');
+      const kids: React.ReactElement[] = Array.from(
+        container.children().getElements(),
+      );
+
+      const contentIndex = kids.findIndex(
+        (el) => el.props.className === 'Text',
+      );
+      const iconIndex = kids.findIndex((el) => el.props.className === 'Icon');
+
+      expect(contentIndex < iconIndex).toBe(true);
+    });
+  });
+
   describe('accessibilityLabel', () => {
     it('passes prop', () => {
       const mockAccessibilityLabel = 'mock accessibility label';
@@ -246,16 +287,15 @@ describe('<Button />', () => {
 
     it('disables the disclosure button when disabled is true', () => {
       const disclosure = {
-        disabled: true,
         actions: [
           {
-            content: 'Save and mark as ordered',
+            content: 'Save',
           },
         ],
       };
 
       const button = mountWithAppProvider(
-        <Button connectedDisclosure={disclosure} />,
+        <Button connectedDisclosure={disclosure} disabled />,
       );
 
       const disclosureButton = button.find('button').at(1);
@@ -284,6 +324,23 @@ describe('<Button />', () => {
       expect(actionList.prop('items')).toStrictEqual(
         expect.arrayContaining(actions),
       );
+    });
+
+    it('takes precedence over the disclosure arrow', () => {
+      const actions = [
+        {
+          content: 'Save and mark as ordered',
+        },
+      ];
+
+      const disclosure = {actions};
+
+      const button = mountWithAppProvider(
+        <Button disclosure="up" connectedDisclosure={disclosure} />,
+      );
+
+      expect(button.find('.DisclosureIcon').exists()).toBe(false);
+      expect(button.find('button')).toHaveLength(2);
     });
   });
 

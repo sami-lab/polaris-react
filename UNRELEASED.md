@@ -9,6 +9,9 @@ Use [the changelog guidelines](https://git.io/polaris-changelog-guidelines) to f
 - Added `focus-visible` polyfill and default styles ([#3695](https://github.com/Shopify/polaris-react/pull/3695))
 - Added `removeUnderline` prop to `Button` to remove underline when `plain` and `monochrome` are true([#3998](https://github.com/Shopify/polaris-react/))pull/3998)
 - Removed `#AppFrameMainContent` link and updated SkipToContent link to target `#AppFrameMain` instead ([#3912](https://github.com/Shopify/polaris-react/pull/3912))
+- Changed `Label` and `Labelled`’s `label` prop type to `React.ReactNode` instead of `string` ([#3787](https://github.com/Shopify/polaris-react/pull/3787))
+- Button `icon` can now be place `before` or `after` button content by using new `iconPlacement` property
+  - Button connected disclosure now follows loading & disabled states from the attached button
 
 ### Bug fixes
 
