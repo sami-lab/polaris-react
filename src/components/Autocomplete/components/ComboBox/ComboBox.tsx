@@ -11,6 +11,7 @@ import {
   ComboBoxListBoxType,
   ComboBoxListBoxOptionType,
   ComboBoxListBoxOptionContext,
+  WithinComboBoxContext,
 } from '../../../../utilities/combo-box';
 
 import styles from './ComboBox.scss';
@@ -121,32 +122,34 @@ export function ComboBox({
   );
 
   return (
-    <Popover
-      active={popoverActive}
-      onClose={handleClose}
-      activator={
-        <ComboBoxTextFieldContext.Provider value={textFieldContextValue}>
-          {activator}
-        </ComboBoxTextFieldContext.Provider>
-      }
-      autofocusTarget="none"
-      preventFocusOnClose
-      fullWidth
-      preferInputActivator={false}
-      preferredPosition={preferredPosition}
-    >
-      <Popover.Pane onScrolledToBottom={onScrolledToBottom}>
-        {Children.count(children) > 0 ? (
-          <ComboBoxListBoxContext.Provider value={listBoxContextValue}>
-            <ComboBoxListBoxOptionContext.Provider
-              value={listBoxOptionContextValue}
-            >
-              <div className={styles.ListBox}>{children}</div>
-            </ComboBoxListBoxOptionContext.Provider>
-          </ComboBoxListBoxContext.Provider>
-        ) : null}
-      </Popover.Pane>
-    </Popover>
+    <WithinComboBoxContext.Provider value>
+      <Popover
+        active={popoverActive}
+        onClose={handleClose}
+        activator={
+          <ComboBoxTextFieldContext.Provider value={textFieldContextValue}>
+            {activator}
+          </ComboBoxTextFieldContext.Provider>
+        }
+        autofocusTarget="none"
+        preventFocusOnClose
+        fullWidth
+        preferInputActivator={false}
+        preferredPosition={preferredPosition}
+      >
+        <Popover.Pane onScrolledToBottom={onScrolledToBottom}>
+          {Children.count(children) > 0 ? (
+            <ComboBoxListBoxContext.Provider value={listBoxContextValue}>
+              <ComboBoxListBoxOptionContext.Provider
+                value={listBoxOptionContextValue}
+              >
+                <div className={styles.ListBox}>{children}</div>
+              </ComboBoxListBoxOptionContext.Provider>
+            </ComboBoxListBoxContext.Provider>
+          ) : null}
+        </Popover.Pane>
+      </Popover>
+    </WithinComboBoxContext.Provider>
   );
 }
 

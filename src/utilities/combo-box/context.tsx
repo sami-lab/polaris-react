@@ -50,3 +50,5 @@ export const ComboBoxListBoxContext = createContext<ComboBoxListBoxType>({});
 export const ComboBoxListBoxOptionContext = createContext<
   ComboBoxListBoxOptionType
 >({});
+
+export const WithinComboBoxContext = createContext(false);
