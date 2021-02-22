@@ -45,6 +45,7 @@ export function useBulkSelectionData({
   itemCount,
   hasMoreItems,
   resourceName: passedResourceName,
+  parentResourceName,
 }: BulkSelectionDataOptions) {
   const i18n = useI18n();
 
@@ -94,6 +95,9 @@ export function useBulkSelectionData({
       return i18n.translate('Polaris.IndexProvider.allItemsSelected', {
         itemsLength: itemCount,
         resourceNamePlural: resourceName.plural.toLocaleLowerCase(),
+        parentResourceName:
+          parentResourceName ||
+          i18n.translate('Polaris.IndexProvider.parentResourceName'),
       });
     }
   }

@@ -270,6 +270,45 @@ describe('<IndexTable>', () => {
         true,
       );
     });
+
+    it('displays default select all text if no parent resource provided', () => {
+      const onSelectionChangeSpy = jest.fn();
+      const index = mountWithApp(
+        <IndexTable
+          {...defaultProps}
+          selectable
+          hasMoreItems
+          selectedItemsCount={1}
+          itemCount={2}
+          promotedBulkActions={[{content: 'promoted action'}]}
+          onSelectionChange={onSelectionChangeSpy}
+        >
+          {mockTableItems.map(mockRenderRow)}
+        </IndexTable>,
+      );
+
+      expect(index).toContainReactText('Select all 2+ items in your store');
+    });
+
+    it('displays select all text with parent resource if parent resource provided', () => {
+      const onSelectionChangeSpy = jest.fn();
+      const index = mountWithApp(
+        <IndexTable
+          {...defaultProps}
+          selectable
+          hasMoreItems
+          selectedItemsCount={1}
+          itemCount={2}
+          promotedBulkActions={[{content: 'promoted action'}]}
+          onSelectionChange={onSelectionChangeSpy}
+          parentResourceName='this discount'
+        >
+          {mockTableItems.map(mockRenderRow)}
+        </IndexTable>,
+      );
+
+      expect(index).toContainReactText('Select all 2+ items in this discount');
+    });
   });
 
   describe('condensed', () => {

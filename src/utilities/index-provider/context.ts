@@ -9,6 +9,7 @@ export interface IndexContextType {
     singular: string;
     plural: string;
   };
+  parentResourceName?: string;
   selectedItemsCount: typeof SELECT_ALL_ITEMS | number;
   bulkActionsAccessibilityLabel?: string;
   selectMode: boolean;

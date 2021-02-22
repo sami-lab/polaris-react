@@ -18,6 +18,7 @@ export function IndexProvider({
   itemCount,
   hasMoreItems,
   condensed,
+  parentResourceName,
 }: IndexProviderProps) {
   const {
     paginatedSelectAllText,
@@ -32,6 +33,7 @@ export function IndexProvider({
     itemCount,
     hasMoreItems,
     resourceName: passedResourceName,
+    parentResourceName,
   });
   const handleSelectionChange = useHandleBulkSelection({onSelectionChange});
 
@@ -41,6 +43,7 @@ export function IndexProvider({
       selectMode,
       selectable,
       resourceName,
+      parentResourceName,
       loading,
       paginatedSelectAllText,
       hasMoreItems,
@@ -55,6 +58,7 @@ export function IndexProvider({
       selectMode,
       selectable,
       resourceName,
+      parentResourceName,
       loading,
       paginatedSelectAllText,
       hasMoreItems,

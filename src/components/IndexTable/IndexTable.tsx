@@ -65,6 +65,7 @@ function IndexTableBase({
     loading,
     bulkSelectState,
     resourceName,
+    parentResourceName,
     bulkActionsAccessibilityLabel,
     selectMode,
     paginatedSelectAllText,
@@ -593,6 +594,9 @@ function IndexTableBase({
         : i18n.translate('Polaris.IndexTable.selectAllItems', {
             itemsLength: itemCount,
             resourceNamePlural: resourceName.plural.toLocaleLowerCase(),
+            parentResourceName:
+              parentResourceName ||
+              i18n.translate('Polaris.IndexProvider.parentResourceName'),
           });
 
     return {
@@ -620,6 +624,7 @@ export function IndexTable({
   loading,
   hasMoreItems,
   condensed,
+  parentResourceName,
   onSelectionChange,
   ...indexTableBaseProps
 }: IndexTableProps) {
@@ -633,6 +638,7 @@ export function IndexTable({
       hasMoreItems={hasMoreItems}
       condensed={condensed}
       onSelectionChange={onSelectionChange}
+      parentResourceName={parentResourceName}
     >
       <IndexTableBase {...indexTableBaseProps}>{children}</IndexTableBase>
     </IndexProvider>

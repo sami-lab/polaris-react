@@ -197,6 +197,29 @@ describe('useBulkSelectionData', () => {
       paginatedSelectAllText,
     });
   });
+
+  it('returns paginated select all text with parent resource when all resources are selected and parent resource name is provided', () => {
+    const itemCount = 4;
+    const resourceName = {
+      singular: 'order',
+      plural: 'orders',
+    };
+    const parentResourceName = 'this discount';
+    const paginatedSelectAllText = `All ${itemCount}+ ${resourceName.plural} in ${parentResourceName} are selected.`;
+    const mockComponent = mountWithApp(
+      <MockComponent
+        selectedItemsCount="All"
+        hasMoreItems
+        itemCount={itemCount}
+        resourceName={resourceName}
+        parentResourceName={parentResourceName}
+      />,
+    );
+
+    expect(mockComponent).toContainReactComponent(TypedChild, {
+      paginatedSelectAllText,
+    });
+  });
 });
 
 describe('useHandleBulkSelection', () => {

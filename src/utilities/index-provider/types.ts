@@ -20,6 +20,7 @@ export interface IndexProviderProps {
     singular: string;
     plural: string;
   };
+  parentResourceName?: string;
   loading?: boolean;
   hasMoreItems?: boolean;
   condensed?: boolean;
@@ -41,6 +42,7 @@ export interface BulkSelectionDataOptions {
   selectedItemsCount: number | typeof SELECT_ALL_ITEMS;
   itemCount: number;
   hasMoreItems?: boolean;
+  parentResourceName?: string;
   resourceName?: {
     singular: string;
     plural: string;
